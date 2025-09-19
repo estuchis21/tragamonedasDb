@@ -52,6 +52,11 @@ CREATE TABLE Spin (
     FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
 );
 
+ALTER TABLE Spin
+ADD id_premio INT NULL,
+    FOREIGN KEY (id_premio) REFERENCES Premio(id_premio);
+
+
 -- 6. Detalle de cada Spin (símbolos obtenidos)
 CREATE TABLE Detalle_Spin (
     id_detalle INT IDENTITY(1,1) PRIMARY KEY,
