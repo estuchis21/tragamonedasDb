@@ -55,6 +55,17 @@ CREATE TABLE Spin (
 ALTER TABLE Spin
 ADD id_premio INT NULL,
     FOREIGN KEY (id_premio) REFERENCES Premio(id_premio);
+    
+
+-- 7. Relación Spin - Premio (tabla intermedia)
+CREATE TABLE Spin_Premio (
+    id_spin_premio INT IDENTITY(1,1) PRIMARY KEY,
+    id_spin INT NOT NULL,
+    id_premio INT NOT NULL,
+    cantidad INT DEFAULT 1, -- cuántas veces se ganó ese premio en la tirada
+    FOREIGN KEY (id_spin) REFERENCES Spin(id_spin),
+    FOREIGN KEY (id_premio) REFERENCES Premio(id_premio)
+);
 
 
 -- 6. Detalle de cada Spin (símbolos obtenidos)
