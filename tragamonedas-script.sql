@@ -10,12 +10,22 @@ CREATE TABLE Usuario (
     partidas_jugadas INT DEFAULT 0
 );
 
+ALTER TABLE Usuario
+ADD dni NVARCHAR(20) NULL;
+
 
 -- 2. Tipos de símbolos
 CREATE TABLE TipoSimbolo (
     id_tipo INT IDENTITY(1,1) PRIMARY KEY,
     nombre NVARCHAR(30) NOT NULL UNIQUE -- Ej: normal, especial, comodin, bonus
 );
+
+INSERT INTO TipoSimbolo (nombre) VALUES
+('Normal'),
+('Especial'),
+('Comodín'),
+('Bonus');
+
 
 -- 3. Símbolos
 CREATE TABLE Simbolo (
@@ -25,6 +35,16 @@ CREATE TABLE Simbolo (
     valor INT NOT NULL,
     FOREIGN KEY (id_tipo) REFERENCES TipoSimbolo(id_tipo)
 );
+
+-- Tipo 1 = Normal, Tipo 2 = Especial, Tipo 3 = Comodín, Tipo 4 = Bonus
+INSERT INTO Simbolo (nombre, id_tipo, valor) VALUES
+('Cereza', 1, 5),
+('Limón', 1, 10),
+('Naranja', 1, 15),
+('Siete', 2, 50),
+('Campana', 2, 30),
+('Diamante', 3, 100);
+
 
 -- 3. Premios
 CREATE TABLE Premio (
