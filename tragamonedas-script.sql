@@ -10,6 +10,10 @@ CREATE TABLE Usuario (
     partidas_jugadas INT DEFAULT 0
 );
 
+ALTER TABLE Usuario
+ADD saldo INT DEFAULT 300000;
+
+
 
 -- 2. Tipos de símbolos
 CREATE TABLE TipoSimbolo (
@@ -26,12 +30,21 @@ CREATE TABLE Simbolo (
     FOREIGN KEY (id_tipo) REFERENCES TipoSimbolo(id_tipo)
 );
 
--- 3. Premios
+
+DROP TABLE IF EXISTS Premio;
+GO
+
 CREATE TABLE Premio (
     id_premio INT IDENTITY(1,1) PRIMARY KEY,
     descripcion NVARCHAR(100),
-    valor INT NOT NULL
+    valor INT NOT NULL,      -- puntos que da ese premio
+    cantidad INT DEFAULT 1   -- cantidad de veces que puede otorgarse
 );
+
+ALTER TABLE Premio
+ADD cantidad INT DEFAULT 1;
+
+
 
 -- 4. Combinaciones
 CREATE TABLE Combinacion (
@@ -41,6 +54,25 @@ CREATE TABLE Combinacion (
     id_premio INT,
     FOREIGN KEY (id_premio) REFERENCES Premio(id_premio)
 );
+
+-- Premios
+INSERT INTO Premio (descripcion, valor) VALUES
+('Premio por 3 iguales', 500),
+('Premio por 4 iguales', 2000),
+('Premio por 5 iguales', 10000);
+
+-- Combinaciones
+INSERT INTO Combinacion (tipo, cantidad_simbolos, id_premio) VALUES
+('horizontal', 3, 1),
+('horizontal', 4, 2),
+('horizontal', 5, 3),
+('vertical', 3, 1),
+('vertical', 4, 2),
+('vertical', 5, 3),
+('diagonal', 3, 1),
+('diagonal', 4, 2),
+('diagonal', 5, 3);
+
 
 -- 5. Spins (tiradas del usuario)
 CREATE TABLE Spin (
