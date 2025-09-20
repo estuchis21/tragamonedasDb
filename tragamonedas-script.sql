@@ -84,6 +84,14 @@ CREATE TABLE Spin (
     FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
 );
 
+ALTER TABLE Spin
+ADD tipo_apuesta NVARCHAR(20) DEFAULT 'horizontal'; -- 'horizontal', 'vertical', 'diagonal', 'todas'
+
+ALTER TABLE Spin
+ADD apuesta INT DEFAULT 0;
+
+
+
 -- 6. Detalle de cada Spin (símbolos obtenidos)
 CREATE TABLE Detalle_Spin (
     id_detalle INT IDENTITY(1,1) PRIMARY KEY,
