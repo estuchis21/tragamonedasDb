@@ -88,3 +88,12 @@ CREATE TABLE Bonificacion (
     id_usuario INT,
     FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
 );
+
+
+CREATE TABLE CombinacionesGanadoras (
+    id_combinacion_ganadora INT IDENTITY(1,1) PRIMARY KEY,
+    id_spin INT NOT NULL,
+    tipo NVARCHAR(20) NOT NULL,           -- 'horizontal', 'vertical', 'diagonal', 'combo'
+    cantidad_simbolos INT NOT NULL,       -- cantidad de símbolos consecutivos
+    valor INT NOT NULL                     -- valor total del premio
+);
